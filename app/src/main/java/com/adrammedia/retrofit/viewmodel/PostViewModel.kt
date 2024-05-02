@@ -4,11 +4,14 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 
 import com.adrammedia.retrofit.data.commentsmodel.CommentsItem
+import com.adrammedia.retrofit.data.photos.PhotosResponseItem
 import com.adrammedia.retrofit.data.postsmodel.Post
 import com.adrammedia.retrofit.data.postsmodel.PostItem
 import com.adrammedia.retrofit.repo.PostsRepo
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -73,5 +76,14 @@ class PostViewModel:ViewModel() {
             }
 
         })
+    }
+
+    private val _photosMutableLiveData = MutableLiveData<List<PhotosResponseItem>>()
+    val photosMutableLiveData:LiveData<List<PhotosResponseItem>> = _photosMutableLiveData
+
+    fun getPhotos() = viewModelScope.launch {
+        postsRepo.getPhotos().collect {
+            _photosMutableLiveData.postValue(it.body())
+        }
     }
 }

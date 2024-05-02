@@ -17,4 +17,5 @@ class PostsRepo {
     fun insertPost(postItem: PostItem):Call<PostItem>{
         return postApiBuilder.postApi.insertPost(post = postItem)
     }
+    suspend fun getPhotos() = postApiBuilder.postApi.getPhotos()
 }

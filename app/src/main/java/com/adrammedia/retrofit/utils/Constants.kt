@@ -5,5 +5,6 @@ object Constants {
     const val POST_END_PONT = "posts"
     const val POST_INTENT_KEY = "postId"
     const val POST_INTENT_TITLE_KEY = "postTitle"
-    const val COMMENT_END_PONT = "comments?"
+    const val COMMENT_END_PONT = "comments"
+    const val PHOTOS_END_PONT = "photos"
 }
